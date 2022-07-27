@@ -42,7 +42,7 @@ sendSlackNotifications(currentBuild.result)
 }
 }//node closing
 //belode code will use for send slack build notification
-def notifyBuild(String buildStatus = 'STARTED') {
+def sendSlackNotifications(String buildStatus = 'STARTED') {
   // build status of null means successful
   buildStatus =  buildStatus ?: 'SUCCESSFUL'
 
