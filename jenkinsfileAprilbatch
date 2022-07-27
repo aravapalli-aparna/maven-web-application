@@ -34,13 +34,13 @@ stage('deploy')
 }
 }
 
-}catch(e){
-currentBuild.result = "FAILED"
-    throw e
-    }
-    finally{
-    sendSlackNotifications(currentBuild.result)
-    }
+}catch (e){
+currentBuild.result = "FAILED" 
+throw e
+}
+finally{
+sendSlackNotifications(currentBuild.result)
+}
 
 }//node closing
 //belode code will use for send slack build notification
