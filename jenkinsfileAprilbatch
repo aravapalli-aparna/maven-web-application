@@ -7,17 +7,16 @@ properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKe
  
 def mavenHome = tool name: "Maven3.8.6"
     
-    stage('checkoutcode')
-    {
-        
-        git branch: 'development', credentialsId: 'f2a70cd3-8ab5-4681-9bfc-2a347c91afc6', url: 'https://github.com/aravapalli-aparna/maven-web-application.git'
-    }
+stage('checkoutcode')
+{
+ git branch: 'development', credentialsId: 'f2a70cd3-8ab5-4681-9bfc-2a347c91afc6', url: 'https://github.com/aravapalli-aparna/maven-web-application.git'
+}
 
-    stage('build')
-    {
-        sh "${mavenHome}/bin/mvn clean package"
-    }
-
+stage('build')
+{
+ sh "${mavenHome}/bin/mvn clean package"
+}
+/*
 stage('Executesonarqubereport')
  {
      sh "${mavenHome}/bin/mvn clean sonar:sonar"
@@ -33,17 +32,14 @@ stage('deploy')
     sh "scp -o  StrictHostKeyChecking=no target/maven-web-application.war ec2-user@172.31.35.17:/opt/apache-tomcat-9.0.64/webapps"
 }
 }
-
-}
-catch(e)
-{
-currentBuild.result = "FAILED" 
-throw e
+*/
+}catch(e) {
+ currentBuild.result = "FAILED" 
+     throw e
 }
 finally{
 sendSlackNotifications(currentBuild.result)
 }
-
 }//node closing
 //belode code will use for send slack build notification
 def notifyBuild(String buildStatus = 'STARTED') {
