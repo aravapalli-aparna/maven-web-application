@@ -6,7 +6,7 @@ properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKe
  echo "Build number is: ${env.BUILD_NUMBER}"
  
 def mavenHome = tool name: "Maven3.8.6"
-    
+try{    
 stage('checkoutcode')
 {
  git branch: 'development', credentialsId: 'f2a70cd3-8ab5-4681-9bfc-2a347c91afc6', url: 'https://github.com/aravapalli-aparna/maven-web-application.git'
